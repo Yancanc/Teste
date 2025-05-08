@@ -16,13 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Rotas para convênios
-Route::get('/convenios', [ConvenioController::class, 'index']);
-Route::get('/convenios/{id}', [ConvenioController::class, 'show']);
-
-// Rotas para instituições
-Route::get('/instituicoes', [InstituicaoController::class, 'index']);
-Route::get('/instituicoes/{id}', [InstituicaoController::class, 'show']);
-
-// Rota para simulação de crédito
-Route::post('/simulacao-credito', [SimulacaoCreditoController::class, 'simular']);
+// API v1
+Route::prefix('v1')->group(function () {
+    // Rotas públicas
+    Route::group(['middleware' => ['throttle:api']], function () {
+        // Rotas para convênios
+        Route::apiResource('convenios', ConvenioController::class)->only(['index', 'show']);
+        
+        // Rotas para instituições
+        Route::apiResource('instituicoes', InstituicaoController::class)->only(['index', 'show']);
+        
+        // Rota para simulação de crédito
+        Route::post('/simulacao-credito', [SimulacaoCreditoController::class, 'simular']);
+    });
+    
+  
+});
