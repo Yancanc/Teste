@@ -3,7 +3,6 @@
 use App\Http\Controllers\ConvenioController;
 use App\Http\Controllers\InstituicaoController;
 use App\Http\Controllers\SimulacaoCreditoController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,11 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-// Rota para listar convênios
+// Apenas as rotas solicitadas
+// Rotas para convênios
 Route::get('/convenios', [ConvenioController::class, 'index']);
 Route::get('/convenios/{id}', [ConvenioController::class, 'show']);
 
@@ -30,4 +26,4 @@ Route::get('/instituicoes', [InstituicaoController::class, 'index']);
 Route::get('/instituicoes/{id}', [InstituicaoController::class, 'show']);
 
 // Rota para simulação de crédito
-Route::post('/simulacao-credito', [SimulacaoCreditoController::class, 'simular']); 
+Route::post('/simulacao-credito', [SimulacaoCreditoController::class, 'simular']);
