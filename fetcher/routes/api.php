@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Apenas as rotas solicitadas
 // Rotas para convênios
 Route::get('/convenios', [ConvenioController::class, 'index']);
 Route::get('/convenios/{id}', [ConvenioController::class, 'show']);
