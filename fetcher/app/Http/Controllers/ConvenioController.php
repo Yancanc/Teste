@@ -26,6 +26,26 @@ class ConvenioController extends Controller
     
     /**
      * Retorna a lista de convênios formatada
+     * 
+     * @OA\Get(
+     *     path="/api/v1/convenios",
+     *     operationId="getConvenios",
+     *     tags={"Convênios"},
+     *     summary="Lista todos os convênios disponíveis",
+     *     description="Retorna a lista completa de convênios que podem ser utilizados para simulação de crédito",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Lista de convênios retornada com sucesso",
+     *         @OA\JsonContent(
+     *             type="array",
+     *             @OA\Items(ref="#/components/schemas/Convenio")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Erro interno do servidor"
+     *     )
+     * )
      *
      * @return AnonymousResourceCollection
      */
@@ -37,6 +57,38 @@ class ConvenioController extends Controller
     
     /**
      * Retorna um convênio específico pelo ID (chave)
+     * 
+     * @OA\Get(
+     *     path="/api/v1/convenios/{id}",
+     *     operationId="getConvenioById",
+     *     tags={"Convênios"},
+     *     summary="Busca um convênio pelo ID",
+     *     description="Retorna os dados de um convênio específico identificado pelo ID",
+     *     @OA\Parameter(
+     *         name="id",
+     *         description="ID do convênio",
+     *         required=true,
+     *         in="path",
+     *         @OA\Schema(type="string")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Convênio encontrado com sucesso",
+     *         @OA\JsonContent(ref="#/components/schemas/Convenio")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Convênio não encontrado",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="message", type="string", example="Convênio não encontrado")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Erro interno do servidor"
+     *     )
+     * )
      *
      * @param string $id
      * @return ConvenioResource|JsonResponse
